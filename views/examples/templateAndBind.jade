@@ -1,0 +1,38 @@
+//
+   Created by jiachiliu on 11/12/14.
+
+extends ../layout
+
+block cssList
+    link(rel='stylesheet', href='/stylesheets/examples/templateAndBind.css')
+block jsList
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js", type="text/javascript")
+    script(src='/javascripts/angular.min.js', type='text/javascript')
+    script(src='/javascripts/examples/templateAndBind.js', type='text/javascript')
+
+block content
+    div(ng-app="TemplateAndBindApp")
+        h1= title
+        p Examples for #{title}
+        section.textDisplay(ng-controller="TextDisplayController")
+            h2 Text Display
+            p Text from Controller: {{message}}
+
+        section.formInput(ng-controller="FormInputController")
+            h2 Form Update When Input Change
+            div
+                label Please input Quantities:
+                input(ng-model="product.quantities", ng-change="computePrice()")
+                p Total Price: {{product.cost}}
+            h2 Form Updated When Form Submit
+            form(ng-submit="computePrice()")
+                label Please input Quantities:
+                input(ng-model="product.quantities")
+                p Total Price: {{product.cost}}
+                button Submit
+            h2 Some Explain
+            p Since both input field is binded on same model, when we change any of them,
+                | the other one will also change. However, when change the first input, it will automatically compute
+                | the price since the ng-change, whereas the second one will only update when submit. Again, both "total price"
+                | are bind on same model, any call on computePrice will change both of them.
+
