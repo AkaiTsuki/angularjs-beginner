@@ -2,15 +2,23 @@
    Created by jiachiliu on 10/27/14.
 
 extends ../layout
-block content
+
+block cssList
     link(rel='stylesheet', href='/stylesheets/examples/todolist/todo.css')
+
+block jsList
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js", type="text/javascript")
+    script(src='/javascripts/angular.min.js', type='text/javascript')
+    script(src='/javascripts/examples/todolist/todo.js', type='text/javascript')
+
+block content
     div(ng-app='toDoApp')
         h1= title
         p Welcome to #{title}
         div(ng-controller='ToDoController')
             p
                 label(for='item') New Item:
-                input(name='item',id='item', ng-model='toDoItem', placeholder='Input a item')
+                input(name='item',id='item', ng-model='toDoItem', placeholder='Input a item', ng-keypress='enter($event)')
                 button(ng-click='addItem()') Add
             // Use ng-bind to prevent flickering effect before dom ready
             div#preview(ng-bind='toDoItem')
@@ -22,6 +30,4 @@ block content
                         span(ng-bind='item.text')
                         span(ng-bind="item.date | date:'yyyy-MM-dd'")
 
-    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js", type="text/javascript")
-    script(src='/javascripts/angular.min.js', type='text/javascript')
-    script(src='/javascripts/examples/todolist/todo.js', type='text/javascript')
+

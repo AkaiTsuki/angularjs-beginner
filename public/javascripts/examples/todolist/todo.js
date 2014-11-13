@@ -11,14 +11,18 @@
 
         $scope.addItem = function () {
             $scope.toDoItem = $scope.toDoItem || "";
-            if($scope.toDoItem.length > 0){
+            if ($scope.toDoItem.length > 0) {
                 $scope.toDoList.push({text: $scope.toDoItem, date: Date.now()});
                 $scope.toDoItem = "";
-            }else{
+            } else {
                 $scope.errorMsg = "Please input an item.";
             }
-
         };
 
+        $scope.enter = function (event) {
+            if (event.which == 13) {
+                $scope.addItem();
+            }
+        };
     }]);
 }());
