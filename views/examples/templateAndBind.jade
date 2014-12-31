@@ -14,11 +14,11 @@ block content
     div(ng-app="TemplateAndBindApp")
         h1= title
         p Examples for #{title}
-        section.textDisplay(ng-controller="TextDisplayController")
+        section#textDisplay(ng-controller="TextDisplayController")
             h2 Text Display
             p Text from Controller: {{message}}
 
-        section.formInput(ng-controller="FormInputController")
+        section#formInput(ng-controller="FormInputController")
             h2 Form Update When Input Change
             div
                 label Please input Quantities:
@@ -30,9 +30,26 @@ block content
                 input(ng-model="product.quantities")
                 p Total Price: {{product.cost}}
                 button Submit
-            h2 Some Explain
-            p Since both input field is binded on same model, when we change any of them,
+            h2 Comments
+            p.comment
+                | Since both input field is binded on same model, when we change any of them,
                 | the other one will also change. However, when change the first input, it will automatically compute
-                | the price since the ng-change, whereas the second one will only update when submit. Again, both "total price"
-                | are bind on same model, any call on computePrice will change both of them.
+                | the price since the ng-change, whereas the second one will only update when submit. Again,
+                | both "total price" are bind on same model, any call on computePrice will change both of them.
 
+        section#repeatElements(ng-controller="RepeatElementController")
+            h2 Lists, Tables, and Other Repeated Elements
+            ul
+                h3 List
+                li(ng-repeat="s in students track by $index")
+                    p Student ID: {{s.id}}
+                    p Student Name: {{s.lastName}}, {{s.firstName}}
+            button(ng-click="addStudent()") Add New Student
+            p.comment
+                | this list is using "track by $index" to allow duplicates in list.
+
+        section#hideAndShow(ng-controller="HideAndShowController")
+            h2 Hiding and Showing
+            button(ng-click="toggle()") Toggle
+            p(ng-show="message.show") {{message.content}}
+            p(class="{{message.style}}") Message with style
