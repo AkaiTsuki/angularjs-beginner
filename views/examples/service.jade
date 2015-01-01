@@ -1,0 +1,22 @@
+//
+   Created by jiachiliu on 12/31/14.
+
+block cssList
+    link(rel='stylesheet', href='/stylesheets/examples/templateAndBind.css')
+
+block jsList
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js", type="text/javascript")
+    script(src='/javascripts/angular.min.js', type='text/javascript')
+    script(src='/javascripts/examples/service.js', type='text/javascript')
+
+block content
+    div(ng-app="serviceApp")
+        h1 {{title}}
+        section(ng-controller="factoryController")
+            h2 {{title}}
+            p encrptClientId : {{encrptClientId}}
+        section(ng-controller="serviceController")
+            h2 {{title}}
+            p service call result: {{serviceResult}}
+        section(ng-controller="providerController")
+            h2 {{title}}

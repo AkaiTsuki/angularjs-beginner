@@ -18,5 +18,9 @@ router.get('/templateAndBind', function (req, res) {
     res.render('examples/templateAndBind', {title: 'AngularJS Template and Data Binding'});
 });
 
+router.get('/service', function (req, res) {
+    res.render('examples/service', {title: 'AngularJS Service, Factory and Provider'});
+});
+
 module.exports = router;
 
