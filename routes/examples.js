@@ -22,5 +22,9 @@ router.get('/service', function (req, res) {
     res.render('examples/service', {title: 'AngularJS Service, Factory and Provider'});
 });
 
+router.get('/eworld', function (req, res) {
+    res.render('examples/electronic-world', {title: 'Project - Electronic World'});
+});
+
 module.exports = router;
 

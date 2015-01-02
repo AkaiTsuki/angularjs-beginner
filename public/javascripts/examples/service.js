@@ -12,15 +12,21 @@ serviceApp
         return "ax30234023";
     })
 /**
- * A factory that use another service and returns a string
+ * A factory that use another service
  */
     .factory('apiToken', ['clientId', function (clientId) {
+
         var encrypt = function (part1, part2) {
             return part1 + ":" + part2;
         };
-
         var secret = "secret";
-        return encrypt(clientId, secret);
+        var service = {};
+
+        service.encrypt = function () {
+            return encrypt(clientId, secret);
+        };
+
+        return service;
     }]);
 
 
@@ -33,7 +39,7 @@ function UserService(apiToken) {
     this.apiToken = apiToken;
 
     this.service = function () {
-        return "user service called on " + this.apiToken;
+        return "user service called on " + this.apiToken.encrypt();
     }
 }
 
@@ -41,7 +47,7 @@ serviceApp.service('UserService', ['apiToken', UserService]);
 
 serviceApp.controller('factoryController', function ($scope, apiToken) {
     $scope.title = "AngularJS Factory";
-    $scope.encrptClientId = apiToken;
+    $scope.encrptClientId = apiToken.encrypt();
 }).controller('serviceController', function ($scope, UserService) {
     $scope.title = "AngularJS Service";
     $scope.serviceResult = UserService.service();
